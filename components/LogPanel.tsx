@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { SortStep } from '@/lib/algorithms/quicksort';
 
@@ -26,12 +26,6 @@ const kindStyles: Record<string, { label: string; bg: string; fg: string }> = {
 export function LogPanel({ steps, currentStep }: LogPanelProps) {
   const { t } = useLanguage();
   const visibleSteps = useMemo(() => steps.slice(0, Math.max(0, currentStep + 1)), [steps, currentStep]);
-  const endRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    // auto-scroll to bottom on new step
-    endRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [visibleSteps.length]);
 
   useEffect(() => {
     // also log to console with colors
@@ -61,7 +55,6 @@ export function LogPanel({ steps, currentStep }: LogPanelProps) {
             </div>
           );
         })}
-        <div ref={endRef} />
       </div>
     </div>
   );
