@@ -52,7 +52,6 @@ export function InputPanel({ onArrayChange, disabled }: InputPanelProps) {
           return;
         }
 
-        setArraySize(numbers.length);
         setError('');
         const normalized = numbers.join(',');
         if (lastEmittedRef.current === normalized) {
@@ -68,6 +67,12 @@ export function InputPanel({ onArrayChange, disabled }: InputPanelProps) {
 
     return () => clearTimeout(timer);
   }, [input, disabled, onArrayChange, t]);
+
+  const handleArraySizeChange = (value: string) => {
+    const num = parseInt(value) || 2;
+    const clampedValue = Math.max(2, Math.min(50, num));
+    setArraySize(clampedValue);
+  };
 
   const handleGenerateRandom = () => {
     const randomArray = Array.from(
@@ -108,7 +113,7 @@ export function InputPanel({ onArrayChange, disabled }: InputPanelProps) {
             min="2"
             max="50"
             value={arraySize}
-            onChange={(e) => setArraySize(Math.max(2, Math.min(50, parseInt(e.target.value) || 10)))}
+            onChange={(e) => handleArraySizeChange(e.target.value)}
             disabled={disabled}
             className="w-16 px-2 py-2 text-sm bg-background border border-input rounded-lg text-foreground text-center focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           />
