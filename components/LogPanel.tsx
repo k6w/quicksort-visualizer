@@ -44,18 +44,18 @@ export function LogPanel({ steps, currentStep }: LogPanelProps) {
   }, [visibleSteps.length, t]);
 
   return (
-    <div className="border-t border-border bg-muted/30 shrink-0 flex flex-col">
-      <div className="flex items-center justify-between px-3 py-2">
+    <div className="border-t border-border bg-muted/30 flex flex-col max-h-[30%] min-h-[120px]">
+      <div className="flex items-center justify-between px-3 py-2 flex-shrink-0 border-b border-border/50">
         <span className="text-xs font-medium text-muted-foreground">{t('logs')}</span>
-        <span className="text-[10px] text-muted-foreground">{visibleSteps.length}</span>
+        <span className="text-[10px] text-muted-foreground">{visibleSteps.length} steps</span>
       </div>
-      <div className="h-56 overflow-auto px-3 pb-3 space-y-1">
+      <div className="flex-1 overflow-auto px-3 py-2 space-y-1 min-h-0">
         {visibleSteps.map((s, i) => {
           const ks = kindStyles[s.kind] || { label: s.kind, bg: 'bg-zinc-700', fg: 'text-zinc-50' };
           return (
             <div key={i} className="flex items-start gap-2 text-xs">
-              <span className={`mt-0.5 inline-flex items-center rounded px-1.5 py-0.5 ${ks.bg} ${ks.fg}`}>{ks.label}</span>
-              <span className="text-foreground/90 break-words">
+              <span className={`mt-0.5 inline-flex items-center rounded px-1.5 py-0.5 text-[10px] whitespace-nowrap ${ks.bg} ${ks.fg}`}>{ks.label}</span>
+              <span className="text-foreground/90 break-words flex-1 leading-relaxed">
                 {t(s.messageKey as any, s.messageParams)}
               </span>
             </div>

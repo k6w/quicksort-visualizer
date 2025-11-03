@@ -82,9 +82,9 @@ export function Visualizer({ step, maxValue }: VisualizerProps) {
       norm = Math.pow(norm, exp);
     }
 
-    // Map to 10%..96% to ensure visibility of small values
-    const percentage = 10 + norm * 86;
-    return `${Math.min(96, Math.max(10, percentage))}%`;
+    // Map to 15%..96% to ensure visibility and text fits
+    const percentage = 15 + norm * 81;
+    return `${Math.min(96, Math.max(15, percentage))}%`;
   };
 
   // Calculate bar width based on array length
@@ -104,19 +104,19 @@ export function Visualizer({ step, maxValue }: VisualizerProps) {
   };
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full h-full flex flex-col overflow-hidden">
       {/* Visualization Area */}
-      <div className="flex-1 flex items-end justify-center gap-0.5 px-2 py-4 overflow-x-auto min-h-[300px]">
+      <div className="flex-1 flex items-end justify-center gap-0.5 px-2 sm:px-4 py-4 pb-6 overflow-x-auto overflow-y-hidden min-h-0">
         {array.map((value, index) => (
           <div
             key={`${index}-${value}`}
             className={`flex flex-col items-center justify-end flex-1 h-full ${getBarWidth()} transition-all duration-300`}
           >
             <div
-              className={`w-full rounded-t-md transition-all duration-300 flex items-end justify-center pb-1 ${getBarColor(index)}`}
-              style={{ height: getBarHeight(value) }}
+              className={`w-full rounded-t-md transition-all duration-300 flex items-center justify-center px-0.5 ${getBarColor(index)}`}
+              style={{ height: getBarHeight(value), minHeight: '24px' }}
             >
-              <span className={`${getFontSize()} font-bold ${getTextColor(index)} opacity-90` }>
+              <span className={`${getFontSize()} font-bold ${getTextColor(index)} opacity-90 leading-none` }>
                 {value}
               </span>
             </div>
@@ -125,33 +125,33 @@ export function Visualizer({ step, maxValue }: VisualizerProps) {
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap justify-center gap-2 md:gap-4 px-2 md:px-4 py-3 border-t border-border bg-muted/30">
+      <div className="flex flex-wrap justify-center gap-2 md:gap-4 px-2 md:px-4 py-2 md:py-3 border-t border-border bg-muted/30 flex-shrink-0">
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 md:w-4 md:h-4 rounded bg-blue-500 dark:bg-blue-600"></div>
-          <span className="text-[10px] md:text-xs text-muted-foreground">{t('legendPartition')}</span>
+          <div className="w-3 h-3 md:w-4 md:h-4 rounded bg-blue-500 dark:bg-blue-600 flex-shrink-0"></div>
+          <span className="text-[10px] md:text-xs text-muted-foreground whitespace-nowrap">{t('legendPartition')}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 md:w-4 md:h-4 rounded bg-purple-500 dark:bg-purple-600"></div>
-          <span className="text-[10px] md:text-xs text-muted-foreground">{t('legendPivot')}</span>
+          <div className="w-3 h-3 md:w-4 md:h-4 rounded bg-purple-500 dark:bg-purple-600 flex-shrink-0"></div>
+          <span className="text-[10px] md:text-xs text-muted-foreground whitespace-nowrap">{t('legendPivot')}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 md:w-4 md:h-4 rounded bg-yellow-500 dark:bg-yellow-600"></div>
-          <span className="text-[10px] md:text-xs text-muted-foreground">{t('legendComparing')}</span>
+          <div className="w-3 h-3 md:w-4 md:h-4 rounded bg-yellow-500 dark:bg-yellow-600 flex-shrink-0"></div>
+          <span className="text-[10px] md:text-xs text-muted-foreground whitespace-nowrap">{t('legendComparing')}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 md:w-4 md:h-4 rounded bg-red-500 dark:bg-red-600"></div>
-          <span className="text-[10px] md:text-xs text-muted-foreground">{t('legendSwapping')}</span>
+          <div className="w-3 h-3 md:w-4 md:h-4 rounded bg-red-500 dark:bg-red-600 flex-shrink-0"></div>
+          <span className="text-[10px] md:text-xs text-muted-foreground whitespace-nowrap">{t('legendSwapping')}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 md:w-4 md:h-4 rounded bg-green-500 dark:bg-green-600"></div>
-          <span className="text-[10px] md:text-xs text-muted-foreground">{t('legendSorted')}</span>
+          <div className="w-3 h-3 md:w-4 md:h-4 rounded bg-green-500 dark:bg-green-600 flex-shrink-0"></div>
+          <span className="text-[10px] md:text-xs text-muted-foreground whitespace-nowrap">{t('legendSorted')}</span>
         </div>
       </div>
 
       {/* Current step message */}
       {step.messageKey && (
-        <div className="px-2 md:px-4 py-2 md:py-3 bg-muted/50 text-center border-t border-border">
-          <p className="text-xs md:text-sm text-foreground font-medium break-words">{t(step.messageKey as any, step.messageParams)}</p>
+        <div className="px-2 md:px-4 py-2 md:py-3 bg-muted/50 text-center border-t border-border flex-shrink-0">
+          <p className="text-xs md:text-sm text-foreground font-medium break-words leading-relaxed">{t(step.messageKey as any, step.messageParams)}</p>
         </div>
       )}
     </div>

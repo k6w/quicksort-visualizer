@@ -184,16 +184,16 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card sticky top-0 z-10">
-        <div className="container mx-auto px-3 md:px-4 py-3">
+      <header className="border-b border-border bg-card sticky top-0 z-10 shadow-sm">
+        <div className="container mx-auto px-3 md:px-4 py-2 md:py-3">
           <div className="flex items-center justify-between gap-2">
             <div className="flex-1 min-w-0">
-              <h1 className="text-xl md:text-2xl font-bold text-foreground truncate">
+              <h1 className="text-base sm:text-xl md:text-2xl font-bold text-foreground truncate">
                 {t('title')}
               </h1>
-              <p className="text-xs md:text-sm text-muted-foreground mt-0.5 truncate">{t('description')}</p>
+              <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-0.5 truncate hidden sm:block">{t('description')}</p>
             </div>
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
               <LanguageToggle />
               <ThemeToggle />
             </div>
@@ -202,10 +202,10 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-3 md:px-4 py-4 md:py-6">
+      <main className="container mx-auto px-3 md:px-4 py-4 md:py-6 pb-20 md:pb-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           {/* Left Column - Controls */}
-          <div className="lg:col-span-1 space-y-3 md:space-y-4">
+          <div className="lg:col-span-1 space-y-3 md:space-y-4 order-2 lg:order-1">
             <InputPanel
               onArrayChange={handleArrayChange}
               disabled={status === 'sorting'}
@@ -233,9 +233,9 @@ export default function Home() {
           </div>
 
           {/* Right Column - Visualizer */}
-          <div className="lg:col-span-2">
-            <div className="bg-card border border-border rounded-lg overflow-hidden h-[500px] md:h-[600px] lg:h-[700px] flex flex-col">
-              <div className="flex-1 min-h-0">
+          <div className="lg:col-span-2 order-1 lg:order-2">
+            <div className="bg-card border border-border rounded-lg overflow-hidden flex flex-col h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]">
+              <div className="flex-1 min-h-0 overflow-hidden">
                 <Visualizer step={currentStepData} maxValue={maxValue} />
               </div>
               <LogPanel steps={steps} currentStep={currentStep} />

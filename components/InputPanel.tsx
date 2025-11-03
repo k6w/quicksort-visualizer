@@ -99,26 +99,27 @@ export function InputPanel({ onArrayChange, disabled }: InputPanelProps) {
         {error && <p className="text-xs text-red-600 dark:text-red-400">{error}</p>}
       </div>
 
-      <div className="flex gap-2">
-        <div className="flex items-center gap-2 flex-1">
+      <div className="flex flex-col sm:flex-row gap-2">
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          <label htmlFor="array-size" className="text-xs text-muted-foreground whitespace-nowrap">{t('arraySize')}:</label>
           <input
+            id="array-size"
             type="number"
             min="2"
             max="50"
             value={arraySize}
             onChange={(e) => setArraySize(Math.max(2, Math.min(50, parseInt(e.target.value) || 10)))}
             disabled={disabled}
-            className="w-14 px-2 py-2 text-sm bg-background border border-input rounded-lg text-foreground text-center focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+            className="w-16 px-2 py-2 text-sm bg-background border border-input rounded-lg text-foreground text-center focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           />
-          <span className="text-xs text-muted-foreground flex-1">{t('arraySize')}</span>
         </div>
 
         <button
           onClick={handleGenerateRandom}
           disabled={disabled}
-          className="flex items-center gap-1.5 py-2.5 px-3 text-sm bg-secondary text-secondary-foreground rounded-lg font-medium hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 whitespace-nowrap"
+          className="flex items-center justify-center gap-1.5 py-2.5 px-4 text-sm bg-secondary text-secondary-foreground rounded-lg font-medium hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 whitespace-nowrap"
         >
-          <Shuffle className="h-3.5 w-3.5" />
+          <Shuffle className="h-3.5 w-3.5 flex-shrink-0" />
           <span>{t('generateRandom')}</span>
         </button>
       </div>

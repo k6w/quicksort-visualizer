@@ -26,14 +26,14 @@ export function AdvancedSettings({ pivotStrategy, onPivotStrategyChange, disable
     <div className="w-full bg-card border border-border rounded-lg overflow-hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
+        className="w-full flex items-center justify-between px-3 md:px-4 py-3 hover:bg-muted/50 transition-colors"
       >
         <div className="flex items-center gap-2">
-          <Settings className="h-4 w-4 text-muted-foreground" />
+          <Settings className="h-4 w-4 text-muted-foreground flex-shrink-0" />
           <span className="text-sm font-medium text-foreground">{t('advanced')}</span>
         </div>
         <svg
-          className={`w-5 h-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-5 h-5 text-muted-foreground transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -43,7 +43,7 @@ export function AdvancedSettings({ pivotStrategy, onPivotStrategyChange, disable
       </button>
 
       {isOpen && (
-        <div className="px-4 py-3 border-t border-border space-y-3">
+        <div className="px-3 md:px-4 py-3 border-t border-border space-y-3">
           <div className="space-y-2">
             <label className="text-xs font-medium text-muted-foreground">{t('pivotStrategy')}</label>
             <div className="grid grid-cols-2 gap-2">

@@ -75,10 +75,10 @@ export function ControlPanel({
   return (
     <div className="w-full bg-card border border-border rounded-lg p-3 md:p-4 space-y-3">
       {/* Status and Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+      <div className="grid grid-cols-2 gap-2">
         <div className="bg-muted rounded-lg p-2">
           <p className="text-[10px] text-muted-foreground mb-0.5">{t('status')}</p>
-          <p className={`text-xs font-bold ${getStatusColor()}`}>{getStatusText()}</p>
+          <p className={`text-xs font-bold ${getStatusColor()} truncate`}>{getStatusText()}</p>
         </div>
         <div className="bg-muted rounded-lg p-2">
           <p className="text-[10px] text-muted-foreground mb-0.5">{t('currentStep')}</p>
@@ -120,8 +120,8 @@ export function ControlPanel({
             disabled={totalSteps === 0}
             className="flex-1 min-w-[100px] flex items-center justify-center gap-1.5 py-2.5 px-3 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           >
-            <Play className="h-3.5 w-3.5" />
-            {t('start')}
+            <Play className="h-3.5 w-3.5 flex-shrink-0" />
+            <span className="whitespace-nowrap">{t('start')}</span>
           </button>
         )}
 
@@ -130,8 +130,8 @@ export function ControlPanel({
             onClick={onPause}
             className="flex-1 min-w-[100px] flex items-center justify-center gap-1.5 py-2.5 px-3 bg-yellow-600 text-white rounded-lg text-sm font-medium hover:bg-yellow-700 transition-all duration-200"
           >
-            <Pause className="h-3.5 w-3.5" />
-            {t('pause')}
+            <Pause className="h-3.5 w-3.5 flex-shrink-0" />
+            <span className="whitespace-nowrap">{t('pause')}</span>
           </button>
         )}
 
@@ -140,8 +140,8 @@ export function ControlPanel({
             onClick={onResume}
             className="flex-1 min-w-[100px] flex items-center justify-center gap-1.5 py-2.5 px-3 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-all duration-200"
           >
-            <Play className="h-3.5 w-3.5" />
-            {t('resume')}
+            <Play className="h-3.5 w-3.5 flex-shrink-0" />
+            <span className="whitespace-nowrap">{t('resume')}</span>
           </button>
         )}
 
