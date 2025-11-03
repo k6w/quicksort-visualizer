@@ -69,8 +69,23 @@ export function InputPanel({ onArrayChange, disabled }: InputPanelProps) {
   }, [input, disabled, onArrayChange, t]);
 
   const handleArraySizeChange = (value: string) => {
-    const num = parseInt(value) || 2;
-    const clampedValue = Math.max(2, Math.min(50, num));
+    // Allow empty or incomplete input while typing
+    if (value === '' || value === '0') {
+      setArraySize(2);
+      return;
+    }
+    const num = parseInt(value);
+    if (isNaN(num)) {
+      setArraySize(2);
+      return;
+    }
+    // Don't clamp while typing - just set the value
+    setArraySize(num);
+  };
+
+  const handleArraySizeBlur = () => {
+    // Clamp to valid range when user finishes typing (on blur)
+    const clampedValue = Math.max(2, Math.min(50, arraySize));
     setArraySize(clampedValue);
   };
 
@@ -114,6 +129,7 @@ export function InputPanel({ onArrayChange, disabled }: InputPanelProps) {
             max="50"
             value={arraySize}
             onChange={(e) => handleArraySizeChange(e.target.value)}
+            onBlur={handleArraySizeBlur}
             disabled={disabled}
             className="w-16 px-2 py-2 text-sm bg-background border border-input rounded-lg text-foreground text-center focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           />
